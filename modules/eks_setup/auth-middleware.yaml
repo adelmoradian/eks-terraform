@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: basic-auth-logs
+  namespace: logs
+spec:
+  basicAuth:
+    secret: basic-auth-logs
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: basic-auth-traefik
+  namespace: traefik
+spec:
+  basicAuth:
+    secret: basic-auth-traefik

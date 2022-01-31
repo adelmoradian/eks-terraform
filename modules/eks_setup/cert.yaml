@@ -1,0 +1,30 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging # this means that we are using the the Let’s Encrypt staging issuer. The Let’s Encrypt production issuer has very strict rate limits. When you are experimenting and learning, it is very easy to hit those limits, and confuse rate limiting with errors in configuration or operation. see this for more info https://letsencrypt.org/docs/rate-limits/
+spec:
+  acme:
+    email: YOUR_EMAIL_HERE
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    solvers:
+    - http01:
+        ingress:
+          class: traefik-ingress-class
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod # this one is the real issuer. See previous comment. See section 6 of this doc for more info https://cert-manager.io/docs/tutorials/acme/nginx-ingress/#step-5-deploy-cert-manager
+spec:
+  acme:
+    email: YOUR_EMAIL_HERE
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - http01:
+        ingress:
+          class: traefik-ingress-class

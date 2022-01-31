@@ -1,0 +1,48 @@
+# Use curly braces to pass values: `helm install --set="additionalArguments={--providers.kubernetesingress.ingressclass=traefik-internal,--log.level=DEBUG}"`
+
+deployment:
+  kind: DaemonSet
+
+ports:
+  web:
+    port: 80
+  websecure:
+    port: 443
+
+# Create an IngressRoute for the dashboard
+ingresRoute:
+  dashboard:
+    enabled: false
+
+# Logs
+# https://docs.traefik.io/observability/logs/
+logs:
+  access:
+    enabled: true
+
+# Whether Role Based Access Control objects like roles and rolebindings should be created
+rbac:
+  enabled: true
+  namespaced: false
+  serviceAccount:
+    name: traefik
+
+# Options for the main traefik service, where the entrypoints traffic comes from
+# annotation so that aws gives us a network load balancer
+service:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+
+# Configure Traefik static configuration
+# Additional arguments to be passed at Traefik's binary
+# All available options available on https://docs.traefik.io/reference/static-configuration/cli/
+additionalArguments:
+  - "--global.sendanonymoususage=false"
+  - "--entryPoints.web.address=:80"
+  - "--entryPoints.websecure.address=:443"
+  - "--metrics.prometheus=true"
+  - "--providers.kubernetesingress.ingressclass=traefik-ingress-class"
+  - "--api.dashboard=true"
+  - "--providers.kubernetesingress=true"
+
+

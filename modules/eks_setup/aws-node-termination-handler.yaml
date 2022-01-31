@@ -1,0 +1,8 @@
+enableRebalanceMonitoring: true
+enableRebalanceDraining: true
+enableSpotInterruptionDraining: true
+enableScheduledEventDraining: false
+# start an http server exposing /metrics endpoint for prometheus.
+enablePrometheusServer: true
+# default HTTP port for exposing prometheus metrics.
+prometheusServerPort: 9092

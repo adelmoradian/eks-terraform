@@ -1,0 +1,10 @@
+#  CRD resources will be installed as part of the Helm chart. If enabled, when uninstalling CRD resources will be deleted causing all installed custom resources to be DELETED
+installCRDs: "true"
+# Number of cert-manager replicas
+replicaCount: 3
+# Number of cert-manager webhook replicas
+webhook:
+  replicaCount: 3
+# Number of cert-manager cainjector replicas
+cainjector:
+  replicaCount: 3
