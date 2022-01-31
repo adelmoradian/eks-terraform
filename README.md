@@ -50,9 +50,9 @@ Terraform apply
 Terraform will first create the required resources in AWS, then it will proceed with deploying the utilities on the cluster. 
 Once apply has finished, you should be able to access Kibana, Grafana and Traefik dashboard. The default url respectively are:
 
-- https://logs.dev.<your hosting_zone>
-- https://monitoring.dev.<your hosting_zone>
-- https://ingress.dev.<your hosting_zone>
+- https://logs.dev.(your hosting_zone)
+- https://monitoring.dev.(your hosting_zone)
+- https://ingress.dev.(your hosting_zone)
 
 By default Cert manager will issue certificates for the routes from the prod letsencrypt issuer. Keep in mind the rate limits!
 
